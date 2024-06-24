@@ -135,3 +135,48 @@ body {
     color: white;
     text-align: left;
 }
+
+
+/* ========================================================== */
+/* container footer styles */
+
+.container-botton {
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    width: 80px;
+}
+
+.btn-left {
+    transform: rotate(180deg);
+    height: 100%;
+}
+
+.btn-left img {
+    height: 100%;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-right img {
+    height: 100%;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-right img:hover {
+    opacity: 0.8;
+}
+
+.btn-left img:hover {
+    opacity: 0.8;
+}
+
+.btn-right {
+    height: 100%;
+}

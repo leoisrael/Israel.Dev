@@ -32,9 +32,14 @@
                     where each line of code is a step towards progress.</p>
             </div>
         </div>
-
-
-        <div class="container-botton"></div>
+        <div class="container-botton">
+            <div class="btn-left">
+                <img src="images/arrow.png">
+            </div>
+            <div class="btn-right">
+                <img src="images/arrow.png">
+            </div>
+        </div>
     </div>
 </body>
 <script>
@@ -88,19 +93,6 @@
     containerBlock1.style.backgroundSize = 'cover';
     containerBlock1.style.backgroundPosition = 'center';
     containerBlock1.style.backgroundRepeat = 'no-repeat';
-
-    function animarCyberpunk() {
-        const apresentacao = document.querySelector('.apresentacao');
-        const coresCyberpunk = ['#0ff', '#f0f', '#0f0', '#ff0', '#f00', '#0af'];
-
-        setInterval(() => {
-            const cor = coresCyberpunk[Math.floor(Math.random() * coresCyberpunk.length)];
-            const saturacao = Math.floor(Math.random() * 200) + 100;
-
-            apresentacao.style.color = cor;
-            apresentacao.style.filter = `saturate(${saturacao}%)`;
-        }, 1000);
-    }
 
     function traduzirTexto(texto, idioma) {
         switch (idioma) {
@@ -164,8 +156,6 @@
 
         const idiomas = ['en', 'pt', 'es', 'ja', 'ko'];
         let indiceIdiomaAtual = 1;
-
-        // animarCyberpunk();
 
         const primeiroIdioma = idiomas[0];
         const primeiraTraducao = {

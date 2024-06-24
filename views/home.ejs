@@ -14,9 +14,9 @@
 
             </div>
             <div class="pages">
-                <a>Home</a>
-                <a>About</a>
-                <a>Contact</a>
+                <a onclick="workOnProg()">Home</a>
+                <a onclick="workOnProg()">About</a>
+                <a onclick="workOnProg()">Contact</a>
             </div>
         </div>
         <div class="container-block1">
@@ -214,5 +214,47 @@
     }
 
     iniciarAnimacaoTraducao();
+
+    function workOnProg() {
+        alertPerson('This feature is still under development. Please come back later.');
+    }
+
+    function alertPerson(text) {
+        const popupDiv = document.createElement('div');
+        popupDiv.classList.add('popup');
+        popupDiv.textContent = text;
+
+        popupDiv.style.opacity = '0';
+
+        popupDiv.style.position = 'fixed';
+        popupDiv.style.top = '90%';
+        popupDiv.style.right = '10px';
+        popupDiv.style.transform = 'translateX(100%)';
+        popupDiv.style.zIndex = '1000';
+
+        popupDiv.style.backgroundColor = 'black';
+        popupDiv.style.padding = '10px';
+        popupDiv.style.borderRadius = '5px';
+        popupDiv.style.color = 'white';
+        popupDiv.style.borderLeft = '5px solid #f26b36';
+
+        document.body.appendChild(popupDiv);
+
+        setTimeout(() => {
+            popupDiv.style.transition = 'opacity 0.5s, transform 0.5s';
+            popupDiv.style.opacity = '1';
+            popupDiv.style.transform = 'translateX(0)';
+        }, 100);
+
+        setTimeout(() => {
+            popupDiv.style.transition = 'opacity 0.5s, transform 0.5s';
+            popupDiv.style.opacity = '0';
+            popupDiv.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                document.body.removeChild(popupDiv);
+            }, 500);
+        }, 8000);
+    }
 </script>
+
 </html>

@@ -83,7 +83,6 @@
         startTextAnimation();
     });
 
-    //definir background image
     const containerBlock1 = document.querySelector('.container-block1');
     containerBlock1.style.backgroundImage = 'url(/images/background.png)';
     containerBlock1.style.backgroundSize = 'cover';
@@ -96,11 +95,11 @@
 
         setInterval(() => {
             const cor = coresCyberpunk[Math.floor(Math.random() * coresCyberpunk.length)];
-            const saturacao = Math.floor(Math.random() * 200) + 100; // Saturação entre 100 e 300
+            const saturacao = Math.floor(Math.random() * 200) + 100;
 
             apresentacao.style.color = cor;
             apresentacao.style.filter = `saturate(${saturacao}%)`;
-        }, 1000); // Altera a cada 2 segundos (simulação de animação)
+        }, 1000);
     }
 
     function traduzirTexto(texto, idioma) {
@@ -163,12 +162,11 @@
             p: 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.'
         };
 
-        const idiomas = ['en', 'pt', 'es', 'ja', 'ko']; // Idiomas para traduzir
-        let indiceIdiomaAtual = 1; // Começa com o segundo idioma da lista
+        const idiomas = ['en', 'pt', 'es', 'ja', 'ko'];
+        let indiceIdiomaAtual = 1;
 
-        animarCyberpunk(); // Inicia a animação cyberpunk
+        animarCyberpunk();
 
-        // Exibe a primeira tradução
         const primeiroIdioma = idiomas[0];
         const primeiraTraducao = {
             h1: traduzirTexto(textoOriginal.h1, primeiroIdioma),
@@ -194,18 +192,16 @@
 
             indiceIdiomaAtual++;
             if (indiceIdiomaAtual >= idiomas.length) {
-                indiceIdiomaAtual = 0; // Reinicia o ciclo de idiomas
+                indiceIdiomaAtual = 0;
             }
-        }, 10000); // Traduz a cada 10 segundos (simulação de tradução)
+        }, 10000);
     }
 
-    // Função para simular animação de digitação
     function animarDigitacao(elemento, texto) {
         const textoAtual = document.querySelector(elemento).textContent;
         const comprimentoAtual = textoAtual.length;
         const comprimentoNovo = texto.length;
 
-        // Simula a animação de digitação
         let i = 0;
         const intervalo = setInterval(() => {
             if (i <= comprimentoNovo) {
@@ -214,13 +210,9 @@
             } else {
                 clearInterval(intervalo);
             }
-        }, 10); // Intervalo de tempo entre cada "tecla pressionada"
+        }, 10);
     }
 
-    // Chamada para iniciar a animação e tradução
     iniciarAnimacaoTraducao();
-
-    
 </script>
-
 </html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Israel Dev</title>
+    <link rel="stylesheet" href="styles/general.css">
+</head>
+
+<body>
+    <div class="container-page">
+        <div class="container-header">
+            <div class="hello-text">
+
+            </div>
+            <div class="pages">
+                <a>Home</a>
+                <a>About</a>
+                <a>Contact</a>
+            </div>
+        </div>
+        <div class="container-block1">
+            <div class="logo">
+                <img src="/images/logo.png">
+            </div>
+            <div class="apresentacao">
+                <h1>Welcome!</h1>
+                <h2>My name is Israel Albuquerque.</h2>
+                <p>I am a software engineer driven by challenges, shaping the future through solutions that push the
+                    boundaries
+                    of technology. My journey is an unwavering quest for innovation,
+                    where each line of code is a step towards progress.</p>
+            </div>
+        </div>
+
+
+        <div class="container-botton"></div>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const messages = [
+            ["Your Code, Your Legacy.", "あなたのコード、あなたの遺産"],
+            ["Coding the Future.", "未来をコーディングする"],
+            ["Automating the Impossible.", "不可能を自動化する"],
+            ["Where Code Becomes Reality.", "コードが現実になる場所"],
+            ["Building Digital Frontiers.", "デジタルのフロンティアを構築する"],
+            ["Engineering Cybernetic Solutions.", "サイバネティックソリューションをエンジニアリングする"],
+            ["Decrypting the Future.", "未来をデクリプトする"],
+            ["Innovating Through Code.", "コードで革新する"],
+            ["Bridging Human and Machine.", "人間と機械を橋渡しする"],
+            ["Shaping the Digital World.", "デジタル世界を形作る"]
+        ];
+
+        const helloTextDiv = document.querySelector(".hello-text");
+        let currentIndex = 0;
+
+        function typeWriter(text, i, fnCallback) {
+            if (i < text.length) {
+                helloTextDiv.textContent = text.substring(0, i + 1);
+                setTimeout(() => {
+                    typeWriter(text, i + 1, fnCallback);
+                }, 100);
+            } else if (typeof fnCallback === 'function') {
+                setTimeout(fnCallback, 1000);
+            }
+        }
+
+        function startTextAnimation() {
+            if (currentIndex < messages.length) {
+                const [english, japanese] = messages[currentIndex];
+                typeWriter(english, 0, () => {
+                    setTimeout(() => {
+                        typeWriter(japanese, 0, () => {
+                            currentIndex = (currentIndex + 1) % messages.length;
+                            setTimeout(startTextAnimation, 2000);
+                        });
+                    }, 2000);
+                });
+            }
+        }
+
+        startTextAnimation();
+    });
+
+    //definir background image
+    const containerBlock1 = document.querySelector('.container-block1');
+    containerBlock1.style.backgroundImage = 'url(/images/background.png)';
+    containerBlock1.style.backgroundSize = 'cover';
+    containerBlock1.style.backgroundPosition = 'center';
+    containerBlock1.style.backgroundRepeat = 'no-repeat';
+
+    function animarCyberpunk() {
+        const apresentacao = document.querySelector('.apresentacao');
+        const coresCyberpunk = ['#0ff', '#f0f', '#0f0', '#ff0', '#f00', '#0af'];
+
+        setInterval(() => {
+            const cor = coresCyberpunk[Math.floor(Math.random() * coresCyberpunk.length)];
+            const saturacao = Math.floor(Math.random() * 200) + 100; // Saturação entre 100 e 300
+
+            apresentacao.style.color = cor;
+            apresentacao.style.filter = `saturate(${saturacao}%)`;
+        }, 1000); // Altera a cada 2 segundos (simulação de animação)
+    }
+
+    function traduzirTexto(texto, idioma) {
+        switch (idioma) {
+            case 'en':
+                return texto;
+            case 'pt':
+                switch (texto) {
+                    case 'Welcome!':
+                        return 'Bem-vindo!';
+                    case 'My name is Israel Albuquerque.':
+                        return 'Meu nome é Israel Albuquerque.';
+                    case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
+                        return 'Sou engenheiro de software impulsionado por desafios, moldando o futuro através de soluções que empurram os limites da tecnologia. Minha jornada é uma busca incessante por inovação, onde cada linha de código é um passo rumo ao progresso.';
+                    default:
+                        return texto;
+                }
+            case 'es':
+                switch (texto) {
+                    case 'Welcome!':
+                        return '¡Bienvenido!';
+                    case 'My name is Israel Albuquerque.':
+                        return 'Mi nombre es Israel Albuquerque.';
+                    case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
+                        return 'Soy un ingeniero de software impulsado por desafíos, dando forma al futuro a través de soluciones que empujan los límites de la tecnología. Mi camino es una búsqueda inquebrantable de innovación, donde cada línea de código es un paso hacia el progreso.';
+                    default:
+                        return texto;
+                }
+            case 'ja':
+                switch (texto) {
+                    case 'Welcome!':
+                        return 'ようこそ！';
+                    case 'My name is Israel Albuquerque.':
+                        return '私の名前はIsrael Albuquerqueです。';
+                    case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
+                        return '私は挑戦に駆り立てられるソフトウェアエンジニアであり、技術の限界を押し広げる解決策を通じて未来を形作っています。私の旅は革新への不断の探求であり、各行のコードは進歩への一歩です。';
+                    default:
+                        return texto;
+                }
+            case 'ko':
+                switch (texto) {
+                    case 'Welcome!':
+                        return '환영합니다!';
+                    case 'My name is Israel Albuquerque.':
+                        return '제 이름은 이스라엘 알부케르크입니다.';
+                    case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
+                        return '저는 도전을 즐기는 소프트웨어 엔지니어로, 기술의 경계를 넓히는 해결책을 통해 미래를 형성하고 있습니다. 제 여정은 끊임없는 혁신을 향한 탐구이며, 각 줄의 코드는 발전을 향한 한 걸음입니다.';
+                    default:
+                        return texto;
+                }
+            default:
+                return texto;
+        }
+    }
+
+    function iniciarAnimacaoTraducao() {
+        const textoOriginal = {
+            h1: 'Welcome!',
+            h2: 'My name is Israel Albuquerque.',
+            p: 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.'
+        };
+
+        const idiomas = ['en', 'pt', 'es', 'ja', 'ko']; // Idiomas para traduzir
+        let indiceIdiomaAtual = 1; // Começa com o segundo idioma da lista
+
+        animarCyberpunk(); // Inicia a animação cyberpunk
+
+        // Exibe a primeira tradução
+        const primeiroIdioma = idiomas[0];
+        const primeiraTraducao = {
+            h1: traduzirTexto(textoOriginal.h1, primeiroIdioma),
+            h2: traduzirTexto(textoOriginal.h2, primeiroIdioma),
+            p: traduzirTexto(textoOriginal.p, primeiroIdioma)
+        };
+
+        animarDigitacao('.apresentacao h1', primeiraTraducao.h1);
+        animarDigitacao('.apresentacao h2', primeiraTraducao.h2);
+        animarDigitacao('.apresentacao p', primeiraTraducao.p);
+
+        setInterval(() => {
+            const idioma = idiomas[indiceIdiomaAtual];
+            const traducao = {
+                h1: traduzirTexto(textoOriginal.h1, idioma),
+                h2: traduzirTexto(textoOriginal.h2, idioma),
+                p: traduzirTexto(textoOriginal.p, idioma)
+            };
+
+            animarDigitacao('.apresentacao h1', traducao.h1);
+            animarDigitacao('.apresentacao h2', traducao.h2);
+            animarDigitacao('.apresentacao p', traducao.p);
+
+            indiceIdiomaAtual++;
+            if (indiceIdiomaAtual >= idiomas.length) {
+                indiceIdiomaAtual = 0; // Reinicia o ciclo de idiomas
+            }
+        }, 10000); // Traduz a cada 10 segundos (simulação de tradução)
+    }
+
+    // Função para simular animação de digitação
+    function animarDigitacao(elemento, texto) {
+        const textoAtual = document.querySelector(elemento).textContent;
+        const comprimentoAtual = textoAtual.length;
+        const comprimentoNovo = texto.length;
+
+        // Simula a animação de digitação
+        let i = 0;
+        const intervalo = setInterval(() => {
+            if (i <= comprimentoNovo) {
+                document.querySelector(elemento).textContent = texto.substring(0, i);
+                i++;
+            } else {
+                clearInterval(intervalo);
+            }
+        }, 10); // Intervalo de tempo entre cada "tecla pressionada"
+    }
+
+    // Chamada para iniciar a animação e tradução
+    iniciarAnimacaoTraducao();
+
+    
+</script>
+
+</html>

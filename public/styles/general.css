@@ -127,6 +127,7 @@ body {
     color: var(--primary-color);
     margin-bottom: 1rem;
     filter: saturate(130%);
+    text-align: left;
 }
 
 .apresentacao p {

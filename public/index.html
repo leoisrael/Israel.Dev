@@ -46,23 +46,15 @@
 
             <!-- ABOUT PAGE (inicialmente oculta) -->
             <div class="page" id="about-page">
-                <div class="container-block-about">
-                    <h1>About Me</h1>
-                    <p>
-                        <!-- Conteúdo do About -->
-                        Aqui você pode descrever sua história, suas habilidades, projetos, etc.
-                    </p>
+                <div class="container-block2">
+                    
                 </div>
             </div>
 
             <!-- CONTACT PAGE (inicialmente oculta) -->
             <div class="page" id="contact-page">
-                <div class="container-block-contact">
-                    <h1>Contact</h1>
-                    <p>
-                        <!-- Conteúdo do Contact -->
-                        Você pode colocar formulário, links de redes sociais ou e-mail.
-                    </p>
+                <div class="container-block3">
+                    
                 </div>
             </div>
 
@@ -400,16 +392,12 @@
         function goLeft() {
             if (currentIndex > 0) {
                 showPage(currentIndex - 1);
-            } else {
-                alertPerson('Não há página à esquerda!');
             }
         }
 
         function goRight() {
             if (currentIndex < pages.length - 1) {
                 showPage(currentIndex + 1);
-            } else {
-                alertPerson('Não há página à direita!');
             }
         }
 

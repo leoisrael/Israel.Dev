@@ -8,243 +8,454 @@
 </head>
 
 <body>
+    <!-- CONTAINER GERAL (Header + Conteúdo + Botões) -->
     <div class="container-page">
+
+        <!-- HEADER FIXO -->
         <div class="container-header">
-            <div class="hello-text">
-
-            </div>
+            <div class="hello-text"></div>
             <div class="pages">
-                <a onclick="workOnProg()">Home</a>
-                <a onclick="workOnProg()">About</a>
-                <a onclick="workOnProg()">Contact</a>
+                <!-- Agora, em vez de workOnProg(), chamamos a função showPage -->
+                <a onclick="showPage(0)">Home</a>
+                <a onclick="showPage(1)">About</a>
+                <a onclick="showPage(2)">Contact</a>
             </div>
         </div>
-        <div class="container-block1">
-            <div class="logo">
-                <img src="images/logo.png">
+
+        <!-- WRAPPER que conterá as páginas (Home, About, Contact) -->
+        <div id="pages-wrapper">
+
+            <!-- HOME PAGE (exibida inicialmente) -->
+            <div class="page" id="home-page" style="display: block;">
+                <div class="container-block1">
+                    <div class="logo">
+                        <img src="images/logo.png" alt="Logo">
+                    </div>
+                    <div class="apresentacao">
+                        <h1>Welcome!</h1>
+                        <h2>My name is Israel Albuquerque.</h2>
+                        <p>
+                            I am a software engineer driven by challenges, shaping the future
+                            through solutions that push the boundaries of technology.
+                            My journey is an unwavering quest for innovation,
+                            where each line of code is a step towards progress.
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="apresentacao">
-                <h1>Welcome!</h1>
-                <h2>My name is Israel Albuquerque.</h2>
-                <p>I am a software engineer driven by challenges, shaping the future through solutions that push the
-                    boundaries
-                    of technology. My journey is an unwavering quest for innovation,
-                    where each line of code is a step towards progress.</p>
+
+            <!-- ABOUT PAGE (inicialmente oculta) -->
+            <div class="page" id="about-page">
+                <div class="container-block-about">
+                    <h1>About Me</h1>
+                    <p>
+                        <!-- Conteúdo do About -->
+                        Aqui você pode descrever sua história, suas habilidades, projetos, etc.
+                    </p>
+                </div>
             </div>
+
+            <!-- CONTACT PAGE (inicialmente oculta) -->
+            <div class="page" id="contact-page">
+                <div class="container-block-contact">
+                    <h1>Contact</h1>
+                    <p>
+                        <!-- Conteúdo do Contact -->
+                        Você pode colocar formulário, links de redes sociais ou e-mail.
+                    </p>
+                </div>
+            </div>
+
         </div>
+
+        <!-- BOTÕES LATERAIS (Navegação Esquerda/Direita) -->
         <div class="container-botton">
-            <div class="btn-left">
-                <img src="images/arrow.png">
+            <div class="btn-left" onclick="goLeft()">
+                <img src="images/arrow.png" alt="Left Arrow">
             </div>
-            <div class="btn-right">
-                <img src="images/arrow.png">
+            <div class="btn-right" onclick="goRight()">
+                <img src="images/arrow.png" alt="Right Arrow">
             </div>
         </div>
+
+        <!-- ... Seu layout: header, pages, botões laterais ... -->
+
+        <!-- OVERLAY DE BLOCOS (inicialmente vazio, será populado via JS) -->
+        <div id="blocks-overlay"></div>
+
     </div>
-</body>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const messages = [
-            ["Your Code, Your Legacy.", "あなたのコード、あなたの遺産"],
-            ["Coding the Future.", "未来をコーディングする"],
-            ["Automating the Impossible.", "不可能を自動化する"],
-            ["Where Code Becomes Reality.", "コードが現実になる場所"],
-            ["Building Digital Frontiers.", "デジタルのフロンティアを構築する"],
-            ["Engineering Cybernetic Solutions.", "サイバネティックソリューションをエンジニアリングする"],
-            ["Decrypting the Future.", "未来をデクリプトする"],
-            ["Innovating Through Code.", "コードで革新する"],
-            ["Bridging Human and Machine.", "人間と機械を橋渡しする"],
-            ["Shaping the Digital World.", "デジタル世界を形作る"]
-        ];
 
-        const helloTextDiv = document.querySelector(".hello-text");
-        let currentIndex = 0;
 
-        function typeWriter(text, i, fnCallback) {
-            if (i < text.length) {
-                helloTextDiv.textContent = text.substring(0, i + 1);
-                setTimeout(() => {
-                    typeWriter(text, i + 1, fnCallback);
-                }, 100);
-            } else if (typeof fnCallback === 'function') {
-                setTimeout(fnCallback, 1000);
-            }
-        }
+    <!-- SCRIPTS -->
+    <script>
+        /******************************************
+         *     ANIMAÇÃO DE TEXTO NO HEADER
+         ******************************************/
+        document.addEventListener("DOMContentLoaded", function () {
+            const messages = [
+                ["Your Code, Your Legacy.", "あなたのコード、あなたの遺産"],
+                ["Coding the Future.", "未来をコーディングする"],
+                ["Automating the Impossible.", "不可能を自動化する"],
+                ["Where Code Becomes Reality.", "コードが現実になる場所"],
+                ["Building Digital Frontiers.", "デジタルのフロンティアを構築する"],
+                ["Engineering Cybernetic Solutions.", "サイバネティックソリューションをエンジニアリングする"],
+                ["Decrypting the Future.", "未来をデクリプトする"],
+                ["Innovating Through Code.", "コードで革新する"],
+                ["Bridging Human and Machine.", "人間と機械を橋渡しする"],
+                ["Shaping the Digital World.", "デジタル世界を形作る"]
+            ];
 
-        function startTextAnimation() {
-            if (currentIndex < messages.length) {
-                const [english, japanese] = messages[currentIndex];
-                typeWriter(english, 0, () => {
+            const helloTextDiv = document.querySelector(".hello-text");
+            let currentIndex = 0;
+
+            function typeWriter(text, i, fnCallback) {
+                if (i < text.length) {
+                    helloTextDiv.textContent = text.substring(0, i + 1);
                     setTimeout(() => {
-                        typeWriter(japanese, 0, () => {
-                            currentIndex = (currentIndex + 1) % messages.length;
-                            setTimeout(startTextAnimation, 2000);
-                        });
-                    }, 2000);
-                });
+                        typeWriter(text, i + 1, fnCallback);
+                    }, 100);
+                } else if (typeof fnCallback === 'function') {
+                    setTimeout(fnCallback, 1000);
+                }
+            }
+
+            function startTextAnimation() {
+                if (currentIndex < messages.length) {
+                    const [english, japanese] = messages[currentIndex];
+                    typeWriter(english, 0, () => {
+                        setTimeout(() => {
+                            typeWriter(japanese, 0, () => {
+                                currentIndex = (currentIndex + 1) % messages.length;
+                                setTimeout(startTextAnimation, 2000);
+                            });
+                        }, 2000);
+                    });
+                }
+            }
+
+            startTextAnimation();
+        });
+
+        /******************************************
+         *   ANIMAÇÃO DE TRADUÇÃO (HOME)
+         ******************************************/
+        function traduzirTexto(texto, idioma) {
+            switch (idioma) {
+                case 'en':
+                    return texto;
+                case 'pt':
+                    switch (texto) {
+                        case 'Welcome!':
+                            return 'Bem-vindo!';
+                        case 'My name is Israel Albuquerque.':
+                            return 'Meu nome é Israel Albuquerque.';
+                        case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
+                            return 'Sou engenheiro de software impulsionado por desafios, moldando o futuro através de soluções que empurram os limites da tecnologia. Minha jornada é uma busca incessante por inovação, onde cada linha de código é um passo rumo ao progresso.';
+                        default:
+                            return texto;
+                    }
+                case 'es':
+                    switch (texto) {
+                        case 'Welcome!':
+                            return '¡Bienvenido!';
+                        case 'My name is Israel Albuquerque.':
+                            return 'Mi nombre es Israel Albuquerque.';
+                        case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
+                            return 'Soy un ingeniero de software impulsado por desafíos, dando forma al futuro a través de soluciones que empujan los límites de la tecnología. Mi camino es una búsqueda inquebrantable de innovación, donde cada línea de código es un paso hacia el progreso.';
+                        default:
+                            return texto;
+                    }
+                case 'ja':
+                    switch (texto) {
+                        case 'Welcome!':
+                            return 'ようこそ！';
+                        case 'My name is Israel Albuquerque.':
+                            return '私の名前はIsrael Albuquerqueです。';
+                        case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
+                            return '私は挑戦に駆り立てられるソフトウェアエンジニアであり、技術の限界を押し広げる解決策を通じて未来を形作っています。私の旅は革新への不断の探求であり、各行のコードは進歩への一歩です。';
+                        default:
+                            return texto;
+                    }
+                case 'ko':
+                    switch (texto) {
+                        case 'Welcome!':
+                            return '환영합니다!';
+                        case 'My name is Israel Albuquerque.':
+                            return '제 이름은 이스라엘 알부케르크입니다.';
+                        case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
+                            return '저는 도전을 즐기는 소프트웨어 엔지니어로, 기술의 경계를 넓히는 해결책을 통해 미래를 형성하고 있습니다. 제 여정은 끊임없는 혁신을 향한 탐구이며, 각 줄의 코드는 발전을 향한 한 걸음입니다.';
+                        default:
+                            return texto;
+                    }
+                default:
+                    return texto;
             }
         }
 
-        startTextAnimation();
-    });
-
-    const containerBlock1 = document.querySelector('.container-block1');
-    containerBlock1.style.backgroundImage = 'url(images/background.png)';
-    containerBlock1.style.backgroundSize = 'cover';
-    containerBlock1.style.backgroundPosition = 'center';
-    containerBlock1.style.backgroundRepeat = 'no-repeat';
-
-    function traduzirTexto(texto, idioma) {
-        switch (idioma) {
-            case 'en':
-                return texto;
-            case 'pt':
-                switch (texto) {
-                    case 'Welcome!':
-                        return 'Bem-vindo!';
-                    case 'My name is Israel Albuquerque.':
-                        return 'Meu nome é Israel Albuquerque.';
-                    case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
-                        return 'Sou engenheiro de software impulsionado por desafios, moldando o futuro através de soluções que empurram os limites da tecnologia. Minha jornada é uma busca incessante por inovação, onde cada linha de código é um passo rumo ao progresso.';
-                    default:
-                        return texto;
-                }
-            case 'es':
-                switch (texto) {
-                    case 'Welcome!':
-                        return '¡Bienvenido!';
-                    case 'My name is Israel Albuquerque.':
-                        return 'Mi nombre es Israel Albuquerque.';
-                    case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
-                        return 'Soy un ingeniero de software impulsado por desafíos, dando forma al futuro a través de soluciones que empujan los límites de la tecnología. Mi camino es una búsqueda inquebrantable de innovación, donde cada línea de código es un paso hacia el progreso.';
-                    default:
-                        return texto;
-                }
-            case 'ja':
-                switch (texto) {
-                    case 'Welcome!':
-                        return 'ようこそ！';
-                    case 'My name is Israel Albuquerque.':
-                        return '私の名前はIsrael Albuquerqueです。';
-                    case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
-                        return '私は挑戦に駆り立てられるソフトウェアエンジニアであり、技術の限界を押し広げる解決策を通じて未来を形作っています。私の旅は革新への不断の探求であり、各行のコードは進歩への一歩です。';
-                    default:
-                        return texto;
-                }
-            case 'ko':
-                switch (texto) {
-                    case 'Welcome!':
-                        return '환영합니다!';
-                    case 'My name is Israel Albuquerque.':
-                        return '제 이름은 이스라엘 알부케르크입니다.';
-                    case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
-                        return '저는 도전을 즐기는 소프트웨어 엔지니어로, 기술의 경계를 넓히는 해결책을 통해 미래를 형성하고 있습니다. 제 여정은 끊임없는 혁신을 향한 탐구이며, 각 줄의 코드는 발전을 향한 한 걸음입니다.';
-                    default:
-                        return texto;
-                }
-            default:
-                return texto;
-        }
-    }
-
-    function iniciarAnimacaoTraducao() {
-        const textoOriginal = {
-            h1: 'Welcome!',
-            h2: 'My name is Israel Albuquerque.',
-            p: 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.'
-        };
-
-        const idiomas = ['en', 'pt', 'es', 'ja', 'ko'];
-        let indiceIdiomaAtual = 1;
-
-        const primeiroIdioma = idiomas[0];
-        const primeiraTraducao = {
-            h1: traduzirTexto(textoOriginal.h1, primeiroIdioma),
-            h2: traduzirTexto(textoOriginal.h2, primeiroIdioma),
-            p: traduzirTexto(textoOriginal.p, primeiroIdioma)
-        };
-
-        animarDigitacao('.apresentacao h1', primeiraTraducao.h1);
-        animarDigitacao('.apresentacao h2', primeiraTraducao.h2);
-        animarDigitacao('.apresentacao p', primeiraTraducao.p);
-
-        setInterval(() => {
-            const idioma = idiomas[indiceIdiomaAtual];
-            const traducao = {
-                h1: traduzirTexto(textoOriginal.h1, idioma),
-                h2: traduzirTexto(textoOriginal.h2, idioma),
-                p: traduzirTexto(textoOriginal.p, idioma)
+        function iniciarAnimacaoTraducao() {
+            const textoOriginal = {
+                h1: 'Welcome!',
+                h2: 'My name is Israel Albuquerque.',
+                p: 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.'
             };
 
-            animarDigitacao('.apresentacao h1', traducao.h1);
-            animarDigitacao('.apresentacao h2', traducao.h2);
-            animarDigitacao('.apresentacao p', traducao.p);
+            const idiomas = ['en', 'pt', 'es', 'ja', 'ko'];
+            let indiceIdiomaAtual = 1;
 
-            indiceIdiomaAtual++;
-            if (indiceIdiomaAtual >= idiomas.length) {
-                indiceIdiomaAtual = 0;
+            const primeiroIdioma = idiomas[0];
+            const primeiraTraducao = {
+                h1: traduzirTexto(textoOriginal.h1, primeiroIdioma),
+                h2: traduzirTexto(textoOriginal.h2, primeiroIdioma),
+                p: traduzirTexto(textoOriginal.p, primeiroIdioma)
+            };
+
+            animarDigitacao('.apresentacao h1', primeiraTraducao.h1);
+            animarDigitacao('.apresentacao h2', primeiraTraducao.h2);
+            animarDigitacao('.apresentacao p', primeiraTraducao.p);
+
+            setInterval(() => {
+                const idioma = idiomas[indiceIdiomaAtual];
+                const traducao = {
+                    h1: traduzirTexto(textoOriginal.h1, idioma),
+                    h2: traduzirTexto(textoOriginal.h2, idioma),
+                    p: traduzirTexto(textoOriginal.p, idioma)
+                };
+
+                animarDigitacao('.apresentacao h1', traducao.h1);
+                animarDigitacao('.apresentacao h2', traducao.h2);
+                animarDigitacao('.apresentacao p', traducao.p);
+
+                indiceIdiomaAtual++;
+                if (indiceIdiomaAtual >= idiomas.length) {
+                    indiceIdiomaAtual = 0;
+                }
+            }, 10000);
+        }
+
+        function animarDigitacao(elemento, texto) {
+            const el = document.querySelector(elemento);
+            if (!el) return;
+            const comprimentoNovo = texto.length;
+            let i = 0;
+            const intervalo = setInterval(() => {
+                if (i <= comprimentoNovo) {
+                    el.textContent = texto.substring(0, i);
+                    i++;
+                } else {
+                    clearInterval(intervalo);
+                }
+            }, 10);
+        }
+
+        // Inicia a animação de tradução (Home)
+        iniciarAnimacaoTraducao();
+
+        const overlay = document.getElementById('blocks-overlay');
+
+        // Ajuste estes valores como preferir:
+        const NUM_BARS = 500;          // quantidade de barras
+        const BASE_DURATION = 0.6;    // tempo base (segundos) para cada barra atravessar a tela
+        const MAX_RANDOM_DELAY = 0.5; // atraso aleatório máximo
+
+        // Vamos guardar o maior delay real encontrado, 
+        // para saber quando encerrar o overlay ao final.
+        let largestDelay = 0;
+
+        // Função para criar as barras dinamicamente
+        function initBlocksOverlay(numBars, baseDuration, maxRandomDelay) {
+            // Limpa o overlay caso já tenha algo
+            overlay.innerHTML = '';
+
+            let maxDelayFound = 0;
+
+            for (let i = 0; i < numBars; i++) {
+                // Cria a div da barra
+                const bar = document.createElement('div');
+                bar.classList.add('block-bar');
+
+                // Altura: 100% / numBars
+                const barHeightPercent = 100 / numBars;
+                bar.style.height = barHeightPercent + '%';
+
+                // Posição vertical: i * (100% / numBars)
+                bar.style.top = (i * barHeightPercent) + '%';
+
+                // Define a duração
+                bar.style.animationDuration = baseDuration + 's';
+
+                // Define um delay aleatório entre 0 e maxRandomDelay
+                const randomDelay = Math.random() * maxRandomDelay;
+                bar.style.animationDelay = randomDelay + 's';
+
+                // Verifica se esse é o maior delay
+                if (randomDelay > maxDelayFound) {
+                    maxDelayFound = randomDelay;
+                }
+
+                // Adiciona a barra ao overlay
+                overlay.appendChild(bar);
             }
-        }, 10000);
-    }
 
-    function animarDigitacao(elemento, texto) {
-        const textoAtual = document.querySelector(elemento).textContent;
-        const comprimentoAtual = textoAtual.length;
-        const comprimentoNovo = texto.length;
+            // Armazena o maior delay para uso posterior
+            largestDelay = maxDelayFound;
+        }
 
-        let i = 0;
-        const intervalo = setInterval(() => {
-            if (i <= comprimentoNovo) {
-                document.querySelector(elemento).textContent = texto.substring(0, i);
-                i++;
-            } else {
-                clearInterval(intervalo);
-            }
-        }, 10);
-    }
+        document.addEventListener("DOMContentLoaded", function () {
+            // ... seu código de animação de texto ...
 
-    iniciarAnimacaoTraducao();
+            // Destaca o Home como ativo ao iniciar
+            updateMenuActiveState(0);
+        });
 
-    function workOnProg() {
-        alertPerson('This feature is still under development. Please come back later.');
-    }
 
-    function alertPerson(text) {
-        const popupDiv = document.createElement('div');
-        popupDiv.classList.add('popup');
-        popupDiv.textContent = text;
+        // Inicializa as barras uma vez ao carregar o script
+        // (você pode chamar de novo se quiser mudar a quantidade etc.)
+        initBlocksOverlay(NUM_BARS, BASE_DURATION, MAX_RANDOM_DELAY);
 
-        popupDiv.style.opacity = '0';
+        /******************************************************
+         *    FUNÇÕES DE TRANSIÇÃO DE PÁGINAS (exemplo)
+         ******************************************************/
+        const pages = ['home', 'about', 'contact'];
+        let currentIndex = 0;
 
-        popupDiv.style.position = 'fixed';
-        popupDiv.style.top = '90%';
-        popupDiv.style.right = '10px';
-        popupDiv.style.transform = 'translateX(100%)';
-        popupDiv.style.zIndex = '1000';
+        function showPage(index) {
+            if (index === currentIndex) return;
 
-        popupDiv.style.backgroundColor = 'black';
-        popupDiv.style.padding = '10px';
-        popupDiv.style.borderRadius = '5px';
-        popupDiv.style.color = 'white';
-        popupDiv.style.borderLeft = '5px solid #f26b36';
+            const direction = (index > currentIndex) ? 'right' : 'left';
+            const oldPageId = pages[currentIndex] + '-page';
+            const newPageId = pages[index] + '-page';
+            const oldPageEl = document.getElementById(oldPageId);
+            const newPageEl = document.getElementById(newPageId);
 
-        document.body.appendChild(popupDiv);
+            // 1) Dispara a animação das barras
+            startBlocksTransition(direction);
 
-        setTimeout(() => {
-            popupDiv.style.transition = 'opacity 0.5s, transform 0.5s';
-            popupDiv.style.opacity = '1';
-            popupDiv.style.transform = 'translateX(0)';
-        }, 100);
-
-        setTimeout(() => {
-            popupDiv.style.transition = 'opacity 0.5s, transform 0.5s';
-            popupDiv.style.opacity = '0';
-            popupDiv.style.transform = 'translateX(100%)';
+            // 2) No tempo = 25% do baseDuration, trocamos a página por trás
+            const quarterTime = BASE_DURATION * 0.25 * 1000;
             setTimeout(() => {
-                document.body.removeChild(popupDiv);
-            }, 500);
-        }, 8000);
-    }
-</script>
+                newPageEl.style.display = 'block';
+                newPageEl.style.transform = (direction === 'right')
+                    ? 'translateX(100%)'
+                    : 'translateX(-100%)';
+                newPageEl.style.transition = 'transform 0.8s ease';
+                newPageEl.getBoundingClientRect(); // forçar reflow
+
+                newPageEl.style.transform = 'translateX(0)';
+                oldPageEl.style.transition = 'transform 0.8s ease';
+                oldPageEl.style.transform = (direction === 'right')
+                    ? 'translateX(-100%)'
+                    : 'translateX(100%)';
+
+                setTimeout(() => {
+                    oldPageEl.style.display = 'none';
+                    oldPageEl.style.transform = 'translateX(0)';
+                    currentIndex = index;
+
+                    // <-- Aqui chamamos a função que atualiza o "ativo" do menu
+                    updateMenuActiveState(index);
+
+                }, 800);
+            }, quarterTime);
+        }
+
+        /** Função que destaca o link do menu correspondente à página atual */
+        function updateMenuActiveState(index) {
+            // Seleciona todos os <a> dentro de .pages
+            const menuLinks = document.querySelectorAll('.pages a');
+
+            // Remove a classe .active de todos e adiciona apenas no link correto
+            menuLinks.forEach((link, i) => {
+                if (i === index) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        function startBlocksTransition(direction) {
+            // 1) Mostra o overlay
+            overlay.style.display = 'block';
+
+            // 2) Remove classes de direção para resetar
+            overlay.classList.remove('transition-left', 'transition-right');
+
+            // 3) Força reflow para aplicar remoção
+            void overlay.offsetWidth;
+
+            // 4) Adiciona a classe que define a animação (blocksRight ou blocksLeft)
+            if (direction === 'right') {
+                overlay.classList.add('transition-left');
+            } else {
+                overlay.classList.add('transition-right');
+            }
+
+            const totalTimeMs = (BASE_DURATION + largestDelay) * 1000;
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, totalTimeMs);
+        }
+
+        // Funções dos botões laterais
+        function goLeft() {
+            if (currentIndex > 0) {
+                showPage(currentIndex - 1);
+            } else {
+                alertPerson('Não há página à esquerda!');
+            }
+        }
+
+        function goRight() {
+            if (currentIndex < pages.length - 1) {
+                showPage(currentIndex + 1);
+            } else {
+                alertPerson('Não há página à direita!');
+            }
+        }
+
+        /******************************************
+         *     ALERTA TEMPORÁRIO (POPUP)
+         ******************************************/
+        function alertPerson(text) {
+            const popupDiv = document.createElement('div');
+            popupDiv.classList.add('popup');
+            popupDiv.textContent = text;
+
+            popupDiv.style.opacity = '0';
+            popupDiv.style.position = 'fixed';
+            popupDiv.style.top = '90%';
+            popupDiv.style.right = '10px';
+            popupDiv.style.transform = 'translateX(100%)';
+            popupDiv.style.zIndex = '1000';
+            popupDiv.style.backgroundColor = 'black';
+            popupDiv.style.padding = '10px';
+            popupDiv.style.borderRadius = '5px';
+            popupDiv.style.color = 'white';
+            popupDiv.style.borderLeft = '5px solid #f26b36';
+
+            document.body.appendChild(popupDiv);
+
+            setTimeout(() => {
+                popupDiv.style.transition = 'opacity 0.5s, transform 0.5s';
+                popupDiv.style.opacity = '1';
+                popupDiv.style.transform = 'translateX(0)';
+            }, 100);
+
+            setTimeout(() => {
+                popupDiv.style.transition = 'opacity 0.5s, transform 0.5s';
+                popupDiv.style.opacity = '0';
+                popupDiv.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(popupDiv);
+                }, 500);
+            }, 5000);
+        }
+
+        // Temporário para os botões do Header (se quiser manter)
+        function workOnProg() {
+            alertPerson('This feature is still under development. Please come back later.');
+        }
+    </script>
+</body>
 
 </html>

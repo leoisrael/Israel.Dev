@@ -1,5 +1,3 @@
-/* General styles for the application */
-
 :root {
     --primary-color: #f26b36;
     --secondary-color: #191919;
@@ -14,23 +12,20 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    background-color: #000;
+    overflow: hidden; /* sem scroll */
 }
 
-/* ========================================================== */
-/* Container styles */
-
+/* ====================================== */
+/* CONTAINER GERAL */
 .container-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    position: relative;
     width: 100vw;
+    height: 100vh;
 }
 
 /* ========================================================== */
 /* Header styles */
-
 .container-header {
     display: flex;
     justify-content: space-between;
@@ -38,8 +33,11 @@ body {
     width: 100%;
     height: 10vh;
     padding: 1rem;
+
+    /* Importante: absolute no topo, z-index alto */
     position: absolute;
     top: 0;
+    left: 0;
     background-color: #000000;
     z-index: 10;
 }
@@ -61,11 +59,6 @@ body {
     }
 }
 
-.pages {
-    display: flex;
-    align-items: center;
-}
-
 .pages a {
     text-decoration: none;
     background-color: var(--primary-color);
@@ -78,20 +71,53 @@ body {
 }
 
 .pages a:hover {
-    background-color: #3b3b3b; /* Cor de fundo mais escura ao passar o mouse */
+    background-color: #3b3b3b;
 }
 
-/* ========================================================== */
-/* container-block1 styles */
+.pages a.active {
+    /* Exemplo de destaque */
+    background-color: #3b3b3b;     /* cor diferente do normal */
+    color: var(--primary-color);   /* texto laranja */
+    border: 2px solid var(--primary-color);
+    transition: background-color 0.3s ease;
+}
 
+/* ====================================== */
+/* WRAPPER PARA AS PÁGINAS */
+#pages-wrapper {
+    /* Agora, sem top: 10vh. Começa no topo também */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* ou 90vh, se preferir */
+    overflow: hidden; /* não mostra scroll */
+}
+
+/* Cada página fica absoluta e oculta até ser mostrada */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none; /* some inicialmente, exceto Home */
+    transform: translateX(0);
+    transition: transform 0.8s ease; /* a transição é controlada via JS */
+    background-color: var(--secondary-color);
+    z-index: 1;
+}
+
+/* ====================================== */
+/* HOME PAGE: container-block1 (com background + polígonos) */
 .container-block1 {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     width: 100%;
-    background-color: var(--secondary-color);
+    height: 100%;
+
+    /* Seu background original com polígonos */
+    background-image: url('../images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .logo {
@@ -111,9 +137,7 @@ body {
     width: 50%;
     display: flex;
     flex-direction: column;
-    justify-content: left;
-    align-items: baseline;
-    transition: color 0.5s ease-in-out, filter 0.5s ease-in-out;
+    align-items: flex-start;
 }
 
 .apresentacao h1 {
@@ -136,11 +160,27 @@ body {
     text-align: left;
 }
 
+/* ====================================== */
+/* ABOUT PAGE */
+.container-block-about {
+    padding: 2rem;
+    color: white;
+    font-size: 1.2rem;
+}
 
-/* ========================================================== */
-/* container footer styles */
+/* ====================================== */
+/* CONTACT PAGE */
+.container-block-contact {
+    padding: 2rem;
+    color: white;
+    font-size: 1.2rem;
+}
 
+/* ====================================== */
+/* BOTÕES LATERAIS */
 .container-botton {
+    /* Se quiser que eles fiquem sobrepostos também,
+       pode manter position: absolute; ou fixed; */
     position: absolute;
     bottom: 4%;
     left: 50%;
@@ -150,6 +190,7 @@ body {
     align-items: center;
     height: 30px;
     width: 80px;
+    z-index: 999; /* Certifique-se de ficar acima das páginas */
 }
 
 .btn-left {
@@ -157,26 +198,106 @@ body {
     height: 100%;
 }
 
-.btn-left img {
-    height: 100%;
-    cursor: pointer;
-    transition: .3s;
-}
-
+.btn-left img,
 .btn-right img {
     height: 100%;
     cursor: pointer;
     transition: .3s;
 }
 
+.btn-left img:hover,
 .btn-right img:hover {
-    opacity: 0.8;
-}
-
-.btn-left img:hover {
     opacity: 0.8;
 }
 
 .btn-right {
     height: 100%;
+}
+
+/* Popup gerado via JS */
+.popup {
+    /* estilizado pelo script */
+}
+
+/* ======================================== */
+/* OVERLAY que cobre tudo durante a transição */
+#blocks-overlay {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 9999;        /* acima de todo o resto */
+    pointer-events: none; /* não interfere no clique */
+    display: none;        /* inicia oculto, JS vai exibir quando precisar */
+}
+
+/* Cada barra é uma faixa horizontal */
+.block-bar {
+    position: absolute;
+    left: 0;
+    width: 100%;
+
+    /* Por padrão, sai pela esquerda ou direita, dependendo da animação */
+    transform: translateX(-100%);
+
+    /* Ajuste da animação via JS (definiremos animation-duration, animation-delay) */
+    animation-fill-mode: forwards; 
+    animation-timing-function: ease;
+}
+
+/* Barras em posições pares (2, 4, 6...) ficam laranja */
+#blocks-overlay .block-bar:nth-child(even) {
+    background-color: #ff4800b9 !important;
+  }
+  
+  /* Barras em posições ímpares (1, 3, 5...) ficam pretas */
+  #blocks-overlay .block-bar:nth-child(odd) {
+    background-color: #00000088 !important;
+  }
+  
+
+/* Keyframe para a transição da ESQUERDA p/ DIREITA */
+@keyframes blocksRight {
+    0% {
+        transform: translateX(-100%);
+    }
+    25% {
+        transform: translateX(0);
+    }
+    75% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Keyframe para a transição da DIREITA p/ ESQUERDA */
+@keyframes blocksLeft {
+    0% {
+        transform: translateX(100%);
+    }
+    25% {
+        transform: translateX(0);
+    }
+    75% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Quando o overlay recebe a classe .transition-right, 
+   cada barra usará blocksRight */
+#blocks-overlay.transition-right .block-bar {
+    animation-name: blocksRight;
+}
+
+/* Quando o overlay recebe a classe .transition-left, 
+   cada barra usará blocksLeft */
+#blocks-overlay.transition-left .block-bar {
+    animation-name: blocksLeft;
 }

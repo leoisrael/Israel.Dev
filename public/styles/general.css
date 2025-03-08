@@ -238,11 +238,6 @@ body {
     height: 100%;
 }
 
-/* Popup gerado via JS */
-.popup {
-    /* estilizado pelo script */
-}
-
 /* ======================================== */
 /* OVERLAY que cobre tudo durante a transição */
 #blocks-overlay {

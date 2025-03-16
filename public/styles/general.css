@@ -144,6 +144,18 @@ body {
     background-repeat: no-repeat;
 }
 
+.container-block4 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    /* Seu background original com polígonos */
+    background-image: url('../images/background3.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .logo {
     position: absolute;
     top: 15%;
@@ -555,4 +567,135 @@ body {
 .container-block3::-webkit-scrollbar-thumb {
     background-color: #f26b36;
     border-radius: 10px;
+}
+
+/* ======= BLOG LISTA - GRID ======= */
+.blog-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 2rem;
+    margin-top: 6rem;
+    padding: 1rem;
+}
+
+/* ======= ESTILO DOS POSTS NA LISTAGEM ======= */
+.blog-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 3px solid #f26b36;
+    padding: 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.blog-card h2 {
+    color: white;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.blog-card small {
+    color: #aaa;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.blog-card p {
+    color: white;
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* ======= VISUALIZAÇÃO DO POST ======= */
+.post-view {
+    display: none;
+    position: absolute;
+    top: 140px; /* Mantém espaço para o navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    height: 70vh; /* Definindo altura fixa para evitar overflow */
+    padding: 2rem;
+    border-radius: 12px;
+    background: rgba(15, 15, 15, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+    text-align: left;
+    color: white;
+    backdrop-filter: blur(10px);
+    overflow-y: auto; /* Scroll para postagens longas */
+}
+
+/* Adicionando um estilo bonito para a barra de rolagem interna */
+.post-view::-webkit-scrollbar {
+    width: 8px;
+}
+
+.post-view::-webkit-scrollbar-track {
+    background: #2e2e2e;
+}
+
+.post-view::-webkit-scrollbar-thumb {
+    background-color: #f26b36;
+    border-radius: 10px;
+}
+
+/* Melhorando a legibilidade do título e do conteúdo */
+.post-view h1 {
+    font-size: 2rem;
+    color: #f26b36;
+    margin-bottom: 0.5rem;
+    margin-top: 2.5rem;
+}
+
+.post-view small {
+    display: block;
+    color: #aaa;
+    margin-bottom: 1rem;
+}
+
+.post-view p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+}
+
+/* Ajustando a formatação de listas */
+.post-view ul {
+    padding-left: 1.5rem;
+}
+
+.post-view li {
+    margin: 1rem;
+}
+
+/* BOTÃO VOLTAR - Melhor Posicionado */
+.back-to-blog {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #f26b36;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.back-to-blog:hover {
+    background: #ff8533;
+    transform: translateY(-2px);
 }

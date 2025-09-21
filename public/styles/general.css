@@ -8,6 +8,7 @@
     --text-light: #f5f5f5;
     --text-muted: #a1a1a1;
     --kanji-color: rgba(242, 107, 54, 0.65);
+    --header-height: 120px;
 }
 
 * {
@@ -52,19 +53,21 @@ button {
 /* ========================================================== */
 /* Header */
 .container-header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: 2rem;
-    padding: 1.5rem 3rem;
-    background: rgba(5, 5, 5, 0.82);
+    gap: 1.5rem;
+    padding: 1.1rem 2.5rem;
+    min-height: var(--header-height);
+    background: rgba(5, 5, 5, 0.88);
     border-bottom: 1px solid rgba(242, 107, 54, 0.2);
     backdrop-filter: blur(16px);
-    z-index: 10;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.45);
+    z-index: 50;
 }
 
 .brand {
@@ -74,8 +77,8 @@ button {
 }
 
 .brand-kanji {
-    font-size: 2.4rem;
-    letter-spacing: 0.4em;
+    font-size: 2rem;
+    letter-spacing: 0.32em;
     color: var(--kanji-color);
     writing-mode: vertical-rl;
     text-orientation: mixed;
@@ -89,21 +92,22 @@ button {
 
 .brand-name {
     text-transform: uppercase;
-    letter-spacing: 0.28em;
-    font-size: 1.2rem;
+    letter-spacing: 0.24em;
+    font-size: 1.1rem;
     font-weight: 700;
 }
 
 .brand-role {
     text-transform: uppercase;
-    letter-spacing: 0.42em;
-    font-size: 0.72rem;
+    letter-spacing: 0.36em;
+    font-size: 0.7rem;
     color: var(--text-muted);
 }
 
 .hello-text {
     justify-self: center;
-    min-width: 320px;
+    min-width: 260px;
+    max-width: 420px;
     letter-spacing: 0.2em;
     font-weight: 700;
     white-space: nowrap;
@@ -123,19 +127,19 @@ button {
 
 .pages {
     display: flex;
-    gap: 0.75rem;
+    gap: 0.6rem;
     justify-content: flex-end;
 }
 
 .pages button {
-    padding: 0.65rem 1.35rem;
+    padding: 0.55rem 1.2rem;
     border-radius: 999px;
     background: rgba(25, 25, 25, 0.85);
     border: 1px solid rgba(242, 107, 54, 0.25);
     color: var(--text-light);
     text-transform: uppercase;
-    letter-spacing: 0.22em;
-    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    font-size: 0.68rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
 }
 
@@ -155,11 +159,12 @@ button {
 /* Pages wrapper */
 #pages-wrapper {
     position: absolute;
-    top: 0;
+    top: var(--header-height);
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100% - var(--header-height));
     overflow: hidden;
+    transition: top 0.3s ease, height 0.3s ease;
 }
 
 .page {
@@ -177,7 +182,7 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 8rem 6rem 4rem;
+    padding: 5.5rem 5.5rem 4rem;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
@@ -410,7 +415,7 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 8rem 6rem 4rem;
+    padding: 5.5rem 5.5rem 4rem;
     background-image: linear-gradient(135deg, rgba(5, 5, 5, 0.9), rgba(30, 15, 0, 0.6)), url('../images/background2.png');
     background-size: cover;
     background-position: center;
@@ -601,6 +606,46 @@ button {
     color: var(--text-muted);
 }
 
+.credentials-grid {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.credential-card {
+    background: var(--panel-elevated);
+    border: 1px solid rgba(242, 107, 54, 0.25);
+    border-radius: 14px;
+    padding: 1.5rem 1.6rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.45);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.credential-card h3 {
+    color: var(--primary-color);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+.credential-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.credential-card li strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
 .about-cta {
     display: flex;
     gap: 1rem;
@@ -626,7 +671,7 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 8rem 6rem 4rem;
+    padding: 5.5rem 5.5rem 4rem;
     background-image: linear-gradient(135deg, rgba(5, 5, 5, 0.92), rgba(30, 10, 0, 0.55)), url('../images/background2.png');
     background-size: cover;
     background-position: center;
@@ -767,7 +812,7 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 8rem 6rem 4rem;
+    padding: 5.5rem 5.5rem 4rem;
     background-image: linear-gradient(135deg, rgba(4, 4, 4, 0.92), rgba(40, 18, 0, 0.6)), url('../images/background3.png');
     background-size: cover;
     background-position: center;
@@ -889,7 +934,7 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 8rem 6rem 4rem;
+    padding: 5.5rem 5.5rem 4rem;
     background-image: linear-gradient(135deg, rgba(6, 6, 6, 0.92), rgba(18, 18, 18, 0.85)), url('../images/background3.png');
     background-size: cover;
     background-position: center;
@@ -1233,6 +1278,10 @@ button {
 }
 
 @media (max-width: 1024px) {
+    :root {
+        --header-height: 180px;
+    }
+
     .container-header {
         grid-template-columns: 1fr;
         row-gap: 1rem;
@@ -1247,6 +1296,9 @@ button {
         justify-self: center;
         border-right: none;
         padding-right: 0;
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
     }
 
     .pages {
@@ -1259,7 +1311,7 @@ button {
     .container-block3,
     .container-block4,
     .container-block-projects {
-        padding: 9rem 3rem 4rem;
+        padding: 6.5rem 3rem 4rem;
     }
 
     .hero-content {
@@ -1305,6 +1357,10 @@ button {
 }
 
 @media (max-width: 720px) {
+    :root {
+        --header-height: 210px;
+    }
+
     .container-header {
         padding: 1rem 1.5rem;
     }
@@ -1314,7 +1370,7 @@ button {
     .container-block3,
     .container-block4,
     .container-block-projects {
-        padding: 9rem 2rem 3rem;
+        padding: 6rem 2rem 3rem;
     }
 
     .hero-headline {

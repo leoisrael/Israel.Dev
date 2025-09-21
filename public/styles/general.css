@@ -1,3 +1,4 @@
+
 :root {
     --primary-color: #f26b36;
     --accent-color: #ff8c42;
@@ -9,6 +10,8 @@
     --text-muted: #a1a1a1;
     --kanji-color: rgba(242, 107, 54, 0.65);
     --header-height: 120px;
+    --page-horizontal-padding: clamp(1.5rem, 5vw, 5.5rem);
+    --page-vertical-padding: clamp(3rem, 6vw + 1rem, 5.5rem);
 }
 
 * {
@@ -21,7 +24,8 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--background-dark);
     color: var(--text-light);
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 a {
@@ -47,6 +51,8 @@ button {
     position: relative;
     width: 100vw;
     height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
     background: radial-gradient(circle at top right, rgba(242, 107, 54, 0.25), transparent 45%);
 }
 
@@ -182,7 +188,7 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 5.5rem 5.5rem 4rem;
+    padding: var(--page-vertical-padding) var(--page-horizontal-padding) clamp(3rem, 5vw, 4rem);
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
@@ -195,11 +201,13 @@ button {
 .hero-content {
     display: grid;
     grid-template-columns: 100px 1.3fr 0.9fr;
+    grid-template-areas: 'ribbon text meta';
     gap: 2.5rem;
     align-items: start;
 }
 
 .hero-ribbon {
+    grid-area: ribbon;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -218,6 +226,7 @@ button {
 }
 
 .hero-text {
+    grid-area: text;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -232,20 +241,20 @@ button {
 }
 
 .hero-headline {
-    font-size: 3.2rem;
+    font-size: clamp(2rem, 3vw + 1rem, 3.2rem);
     line-height: 1.1;
     color: var(--primary-color);
     text-shadow: 0 0 25px rgba(242, 107, 54, 0.35);
 }
 
 .hero-subtitle {
-    font-size: 1.4rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
     font-weight: 500;
     color: #ffffff;
 }
 
 .hero-description {
-    font-size: 1.05rem;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.86);
     max-width: 620px;
@@ -340,6 +349,7 @@ button {
 }
 
 .hero-meta {
+    grid-area: meta;
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr;
@@ -453,7 +463,7 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 5.5rem 5.5rem 4rem;
+    padding: var(--page-vertical-padding) var(--page-horizontal-padding) clamp(3rem, 5vw, 4rem);
     background-image: linear-gradient(135deg, rgba(5, 5, 5, 0.9), rgba(30, 15, 0, 0.6)), url('../images/background2.png');
     background-size: cover;
     background-position: center;
@@ -709,7 +719,7 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 5.5rem 5.5rem 4rem;
+    padding: var(--page-vertical-padding) var(--page-horizontal-padding) clamp(3rem, 5vw, 4rem);
     background-image: linear-gradient(135deg, rgba(5, 5, 5, 0.92), rgba(30, 10, 0, 0.55)), url('../images/background2.png');
     background-size: cover;
     background-position: center;
@@ -850,7 +860,7 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 5.5rem 5.5rem 4rem;
+    padding: var(--page-vertical-padding) var(--page-horizontal-padding) clamp(3rem, 5vw, 4rem);
     background-image: linear-gradient(135deg, rgba(4, 4, 4, 0.92), rgba(40, 18, 0, 0.6)), url('../images/background3.png');
     background-size: cover;
     background-position: center;
@@ -972,7 +982,7 @@ button {
     position: relative;
     width: 100%;
     height: 100%;
-    padding: 5.5rem 5.5rem 4rem;
+    padding: var(--page-vertical-padding) var(--page-horizontal-padding) clamp(3rem, 5vw, 4rem);
     background-image: linear-gradient(135deg, rgba(6, 6, 6, 0.92), rgba(18, 18, 18, 0.85)), url('../images/background3.png');
     background-size: cover;
     background-position: center;
@@ -1292,18 +1302,27 @@ button {
 /* ====================================== */
 /* Responsive adjustments */
 @media (max-width: 1280px) {
+    .container-header {
+        padding: 1.2rem clamp(1.5rem, 4vw, 2.5rem);
+        gap: 1rem;
+    }
+
     .hero-content {
-        grid-template-columns: 80px 1fr;
+        grid-template-columns: 80px minmax(0, 1fr);
+        grid-template-areas:
+            'ribbon text'
+            'meta meta';
+        align-items: stretch;
+        gap: 2rem;
     }
 
     .hero-meta {
-        grid-column: span 2;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
     .hero-footer {
-        grid-template-columns: auto 1fr;
-        row-gap: 1rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        row-gap: 1.25rem;
     }
 
     .hero-divider {
@@ -1311,37 +1330,71 @@ button {
     }
 
     .pagination-hud {
-        right: 2rem;
+        right: clamp(1.5rem, 3vw, 2.5rem);
+        bottom: clamp(1.5rem, 3vw, 2.5rem);
     }
 }
 
 @media (max-width: 1024px) {
-    :root {
-        --header-height: 180px;
-    }
-
     .container-header {
         grid-template-columns: 1fr;
-        row-gap: 1rem;
+        justify-items: center;
         text-align: center;
+        padding: 1.1rem clamp(1.25rem, 4vw, 2rem);
+        gap: 0.75rem;
     }
 
     .brand {
         justify-content: center;
     }
 
+    .brand-kanji {
+        font-size: 1.6rem;
+        letter-spacing: 0.24em;
+    }
+
+    .brand-info {
+        align-items: center;
+    }
+
+    .brand-role {
+        letter-spacing: 0.28em;
+    }
+
     .hello-text {
-        justify-self: center;
+        justify-self: stretch;
         border-right: none;
         padding-right: 0;
         min-width: 0;
-        max-width: 100%;
         width: 100%;
+        text-align: center;
+        white-space: normal;
+        letter-spacing: 0.24em;
+        font-size: 0.75rem;
     }
 
     .pages {
         justify-content: center;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.25rem;
+        gap: 0.5rem;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(242, 107, 54, 0.35) transparent;
+    }
+
+    .pages button {
+        flex: 0 0 auto;
+    }
+
+    .pages::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .pages::-webkit-scrollbar-thumb {
+        background: rgba(242, 107, 54, 0.35);
+        border-radius: 999px;
     }
 
     .container-block1,
@@ -1349,105 +1402,175 @@ button {
     .container-block3,
     .container-block4,
     .container-block-projects {
-        padding: 6.5rem 3rem 4rem;
+        padding-top: calc(var(--page-vertical-padding) + 1rem);
     }
 
     .hero-content {
         grid-template-columns: 1fr;
+        grid-template-areas:
+            'ribbon'
+            'text'
+            'meta';
+        gap: 1.75rem;
     }
 
     .hero-ribbon {
         flex-direction: row;
         writing-mode: horizontal-tb;
-        padding: 1rem;
-        justify-content: space-around;
+        justify-content: center;
+        gap: 1.25rem;
+        padding: 0.75rem 1rem;
+        letter-spacing: 0.4em;
+    }
+
+    .hero-meta {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
     .hero-footer {
         grid-template-columns: 1fr;
         text-align: center;
         justify-items: center;
+        gap: 1.25rem;
+    }
+
+    .hero-footnote,
+    .hero-availability {
+        align-items: center;
+    }
+
+    .hero-mark {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .hero-badges {
+        justify-content: center;
+    }
+
+    .hero-actions {
+        justify-content: center;
     }
 
     .projects-footer {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        gap: 1.5rem;
+        text-align: left;
     }
 
-    .contact-grid {
-        grid-template-columns: 1fr;
+    .projects-footer p {
+        max-width: none;
     }
 
+    .contact-grid,
     .blog-wrapper {
         grid-template-columns: 1fr;
     }
 
     .pagination-hud {
         position: static;
-        transform: none;
+        width: min(360px, 100%);
         margin: 1.5rem auto 0;
         align-items: center;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .indicator-dots {
+        justify-content: center;
     }
 
     .container-botton {
-        bottom: 2rem;
+        position: static;
+        transform: none;
+        margin: 2rem auto 0;
     }
 }
 
-@media (max-width: 720px) {
-    :root {
-        --header-height: 210px;
-    }
-
+@media (max-width: 768px) {
     .container-header {
-        padding: 1rem 1.5rem;
+        padding: 1rem clamp(1rem, 4vw, 1.5rem);
+        gap: 0.6rem;
     }
 
-    .container-block1,
-    .container-block2,
-    .container-block3,
-    .container-block4,
-    .container-block-projects {
-        padding: 6rem 2rem 3rem;
+    .hello-text {
+        letter-spacing: 0.18em;
+        font-size: 0.72rem;
     }
 
-    .hero-headline {
-        font-size: 2.4rem;
+    .pages button {
+        font-size: 0.65rem;
+        padding: 0.5rem 0.9rem;
+        letter-spacing: 0.16em;
     }
 
-    .hero-subtitle {
-        font-size: 1.2rem;
+    .hero-content {
+        gap: 1.5rem;
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr;
+    .hero-ribbon {
+        font-size: 0.85rem;
+        letter-spacing: 0.32em;
+        flex-wrap: wrap;
     }
 
+    .hero-footer {
+        gap: 1.5rem;
+    }
+
+    .projects-grid,
     .blog-list {
         grid-template-columns: 1fr;
     }
 
+    .page-counter {
+        letter-spacing: 0.28em;
+    }
+
     .pagination-hud {
-        width: calc(100% - 4rem);
+        width: calc(100% - 3rem);
     }
 }
 
 @media (max-width: 520px) {
+    .brand {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .brand-info {
+        align-items: center;
+    }
+
+    .brand-name {
+        letter-spacing: 0.2em;
+    }
+
+    .brand-role {
+        letter-spacing: 0.24em;
+        font-size: 0.65rem;
+    }
+
+    .pages {
+        gap: 0.4rem;
+    }
+
     .pages button {
         font-size: 0.62rem;
-        padding: 0.55rem 1rem;
+        padding: 0.5rem 0.85rem;
     }
 
-    .hero-actions {
+    .hero-ribbon {
         flex-direction: column;
-        align-items: stretch;
+        gap: 0.5rem;
+        align-items: center;
     }
 
-    .hero-badges {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
+    .hero-actions,
+    .hero-badges,
     .translation-controls {
         flex-direction: column;
         align-items: stretch;
@@ -1460,5 +1583,9 @@ button {
 
     .projects-footer {
         align-items: stretch;
+    }
+
+    .pagination-hud {
+        width: calc(100% - 2rem);
     }
 }

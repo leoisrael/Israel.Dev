@@ -301,6 +301,44 @@ button {
     text-transform: uppercase;
 }
 
+.translation-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.translation-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    border: 1px solid rgba(242, 107, 54, 0.4);
+    background: rgba(18, 18, 18, 0.85);
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.translation-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 16px rgba(242, 107, 54, 0.45);
+}
+
+.translation-toggle:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.translation-toggle__icon {
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
 .hero-meta {
     display: grid;
     gap: 1rem;
@@ -1408,6 +1446,16 @@ button {
     .hero-badges {
         flex-direction: column;
         align-items: stretch;
+    }
+
+    .translation-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .translation-toggle {
+        justify-content: center;
+        width: 100%;
     }
 
     .projects-footer {

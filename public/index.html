@@ -68,6 +68,12 @@
                                 <span class="badge">守護 • Cybersecurity leadership</span>
                                 <span class="badge">数理 • Applied mathematics</span>
                             </div>
+                            <div class="translation-controls">
+                                <button type="button" id="translation-toggle" class="translation-toggle" aria-pressed="false">
+                                    <span class="translation-toggle__icon" aria-hidden="true">⏸</span>
+                                    <span class="translation-toggle__label">Pause language animation</span>
+                                </button>
+                            </div>
                         </div>
                         <div class="hero-meta">
                             <div class="meta-card">
@@ -599,6 +605,16 @@
             }
         };
 
+        const translationState = {
+            languages: ['en', 'pt', 'es', 'ja', 'ko'],
+            currentIndex: 0,
+            isPaused: false,
+            cycleTimeout: null,
+            textoOriginal: null
+        };
+
+        const translationToggleButton = document.getElementById('translation-toggle');
+
         function traduzirTexto(texto, idioma) {
             if (idioma === 'en') {
                 return texto;
@@ -611,46 +627,6 @@
             }
 
             return heroTranslations[idioma]?.[key] || texto;
-        }
-
-        function iniciarAnimacaoTraducao() {
-            const textoOriginal = {
-                h1: heroTranslations.en.headline,
-                h2: heroTranslations.en.subtitle,
-                p: heroTranslations.en.paragraph
-            };
-
-            const idiomas = ['en', 'pt', 'es', 'ja', 'ko'];
-            let indiceIdiomaAtual = 1;
-
-            const primeiroIdioma = idiomas[0];
-            const primeiraTraducao = {
-                h1: traduzirTexto(textoOriginal.h1, primeiroIdioma),
-                h2: traduzirTexto(textoOriginal.h2, primeiroIdioma),
-                p: traduzirTexto(textoOriginal.p, primeiroIdioma)
-            };
-
-            animarDigitacao('.apresentacao .hero-headline', primeiraTraducao.h1);
-            animarDigitacao('.apresentacao .hero-subtitle', primeiraTraducao.h2);
-            animarDigitacao('.apresentacao .hero-description', primeiraTraducao.p);
-
-            setInterval(() => {
-                const idioma = idiomas[indiceIdiomaAtual];
-                const traducao = {
-                    h1: traduzirTexto(textoOriginal.h1, idioma),
-                    h2: traduzirTexto(textoOriginal.h2, idioma),
-                    p: traduzirTexto(textoOriginal.p, idioma)
-                };
-
-                animarDigitacao('.apresentacao .hero-headline', traducao.h1);
-                animarDigitacao('.apresentacao .hero-subtitle', traducao.h2);
-                animarDigitacao('.apresentacao .hero-description', traducao.p);
-
-                indiceIdiomaAtual++;
-                if (indiceIdiomaAtual >= idiomas.length) {
-                    indiceIdiomaAtual = 0;
-                }
-            }, 10000);
         }
 
         function animarDigitacao(elemento, texto) {
@@ -666,6 +642,102 @@
                     clearInterval(intervalo);
                 }
             }, 10);
+        }
+
+        function aplicarTraducaoHero(idioma) {
+            if (!translationState.textoOriginal) return;
+
+            const traducao = {
+                h1: traduzirTexto(translationState.textoOriginal.h1, idioma),
+                h2: traduzirTexto(translationState.textoOriginal.h2, idioma),
+                p: traduzirTexto(translationState.textoOriginal.p, idioma)
+            };
+
+            animarDigitacao('.apresentacao .hero-headline', traducao.h1);
+            animarDigitacao('.apresentacao .hero-subtitle', traducao.h2);
+            animarDigitacao('.apresentacao .hero-description', traducao.p);
+        }
+
+        function agendarProximaTraducao() {
+            if (translationState.cycleTimeout) {
+                clearTimeout(translationState.cycleTimeout);
+            }
+
+            if (translationState.isPaused) {
+                translationState.cycleTimeout = null;
+                return;
+            }
+
+            translationState.cycleTimeout = setTimeout(() => {
+                if (translationState.isPaused) {
+                    translationState.cycleTimeout = null;
+                    return;
+                }
+
+                translationState.currentIndex = (translationState.currentIndex + 1) % translationState.languages.length;
+                const proximoIdioma = translationState.languages[translationState.currentIndex];
+                aplicarTraducaoHero(proximoIdioma);
+                agendarProximaTraducao();
+            }, 10000);
+        }
+
+        function pausarAnimacaoTraducao() {
+            translationState.isPaused = true;
+            if (translationState.cycleTimeout) {
+                clearTimeout(translationState.cycleTimeout);
+                translationState.cycleTimeout = null;
+            }
+        }
+
+        function retomarAnimacaoTraducao() {
+            if (!translationState.isPaused) return;
+            translationState.isPaused = false;
+            agendarProximaTraducao();
+        }
+
+        function atualizarBotaoTraducao() {
+            if (!translationToggleButton) return;
+
+            translationToggleButton.setAttribute('aria-pressed', translationState.isPaused ? 'true' : 'false');
+
+            const iconEl = translationToggleButton.querySelector('.translation-toggle__icon');
+            const labelEl = translationToggleButton.querySelector('.translation-toggle__label');
+
+            if (iconEl) {
+                iconEl.textContent = translationState.isPaused ? '▶' : '⏸';
+            }
+
+            if (labelEl) {
+                labelEl.textContent = translationState.isPaused ? 'Play language animation' : 'Pause language animation';
+            }
+        }
+
+        function iniciarAnimacaoTraducao() {
+            translationState.textoOriginal = {
+                h1: heroTranslations.en.headline,
+                h2: heroTranslations.en.subtitle,
+                p: heroTranslations.en.paragraph
+            };
+
+            translationState.currentIndex = 0;
+            translationState.isPaused = false;
+
+            const idiomaInicial = translationState.languages[translationState.currentIndex];
+            aplicarTraducaoHero(idiomaInicial);
+            agendarProximaTraducao();
+            atualizarBotaoTraducao();
+        }
+
+        if (translationToggleButton) {
+            translationToggleButton.addEventListener('click', () => {
+                if (translationState.isPaused) {
+                    retomarAnimacaoTraducao();
+                } else {
+                    pausarAnimacaoTraducao();
+                }
+
+                atualizarBotaoTraducao();
+            });
         }
 
         // Inicia a animação de tradução (Home)

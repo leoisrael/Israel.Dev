@@ -19,14 +19,21 @@
 
         <!-- HEADER FIXO -->
         <div class="container-header">
-            <div class="hello-text"></div>
-            <div class="pages">
-                <!-- Agora, em vez de workOnProg(), chamamos a função showPage -->
-                <a onclick="showPage(0)">Home</a>
-                <a onclick="showPage(1)">About</a>
-                <a onclick="showPage(2)">Contact</a>
-                <a onclick="showPage(3)">Blog</a>
+            <div class="brand" aria-label="Israel Dev signature">
+                <span class="brand-kanji" aria-hidden="true">未来</span>
+                <div class="brand-info">
+                    <span class="brand-name">Israel Dev</span>
+                    <span class="brand-role">Cybernetic Software Engineer</span>
+                </div>
             </div>
+            <div class="hello-text" aria-live="polite"></div>
+            <nav class="pages" aria-label="Primary">
+                <button type="button" onclick="showPage(0)">Home</button>
+                <button type="button" onclick="showPage(1)">About</button>
+                <button type="button" onclick="showPage(2)">Projects</button>
+                <button type="button" onclick="showPage(3)">Contact</button>
+                <button type="button" onclick="showPage(4)">Blog</button>
+            </nav>
         </div>
 
         <!-- WRAPPER que conterá as páginas (Home, About, Contact) -->
@@ -35,18 +42,60 @@
             <!-- HOME PAGE (exibida inicialmente) -->
             <div class="page" id="home-page" style="display: block;">
                 <div class="container-block1">
-                    <div class="logo">
-                        <img src="images/logo.png" alt="Logo">
+                    <div class="hero-content">
+                        <div class="hero-ribbon" aria-hidden="true">
+                            <span>コード職人</span>
+                            <span>未来志向</span>
+                        </div>
+                        <div class="apresentacao hero-text">
+                            <span class="hero-eyebrow">Minimal cyberpunk aesthetics with Japanese precision</span>
+                            <h1 class="hero-headline">Cybernetic craftsmanship for mission-critical systems.</h1>
+                            <h2 class="hero-subtitle">I'm Israel Albuquerque, a senior engineer architecting resilient platforms.</h2>
+                            <p class="hero-description">
+                                From urban mobility to cybersecurity, I deliver minimal, impactful solutions inspired by Tokyo's neon precision.
+                            </p>
+                            <div class="hero-actions">
+                                <button type="button" class="cta primary" onclick="showPage(2)">Explore Projects</button>
+                                <button type="button" class="cta ghost" onclick="showPage(3)">Let's Collaborate</button>
+                            </div>
+                            <div class="hero-badges">
+                                <span class="badge">侍 • Samurai discipline</span>
+                                <span class="badge">禅 • Precision</span>
+                                <span class="badge">匠 • Craftsmanship</span>
+                            </div>
+                        </div>
+                        <div class="hero-meta">
+                            <div class="meta-card">
+                                <span class="meta-label">Experience</span>
+                                <span class="meta-value">10+ years</span>
+                                <span class="meta-detail">Leading mission-critical platforms across LATAM.</span>
+                            </div>
+                            <div class="meta-card">
+                                <span class="meta-label">Focus</span>
+                                <span class="meta-value">Resilient systems</span>
+                                <span class="meta-detail">Cybersecurity, automation &amp; fail-safe design.</span>
+                            </div>
+                            <div class="meta-card">
+                                <span class="meta-label">Currently</span>
+                                <span class="meta-value">SIMM.PRO</span>
+                                <span class="meta-detail">Elevating intelligent transport infrastructure.</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="apresentacao">
-                        <h1>Welcome!</h1>
-                        <h2>My name is Israel Albuquerque.</h2>
-                        <p>
-                            I am a software engineer driven by challenges, shaping the future
-                            through solutions that push the boundaries of technology.
-                            My journey is an unwavering quest for innovation,
-                            where each line of code is a step towards progress.
-                        </p>
+                    <div class="hero-footer">
+                        <div class="hero-mark">
+                            <img src="images/logo.png" alt="Israel Dev monogram">
+                            <span class="mark-caption">Israel Albuquerque</span>
+                        </div>
+                        <div class="hero-divider"></div>
+                        <div class="hero-footnote">
+                            <span class="footnote-label">Stack</span>
+                            <span class="footnote-value">Go · Node.js · Python · C++ · Kubernetes · Terraform</span>
+                        </div>
+                        <div class="hero-availability">
+                            <span class="status-dot"></span>
+                            <span>Available for strategic partnerships &amp; advisory</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -55,13 +104,30 @@
             <div class="page" id="about-page">
                 <div class="container-block2">
                     <div class="about-content">
-                        <h1 class="neon-title">About Me</h1>
-                        <p class="intro">
-                            I'm <span class="highlight">Israel Albuquerque</span>, a <span class="highlight">Senior
-                                Full-Stack Software Engineer</span> passionate about developing <span
-                                class="neon">cutting-edge technological solutions</span> and continuously pushing the
-                            boundaries of innovation.
-                        </p>
+                        <div class="section-header">
+                            <span class="section-eyebrow">人間 + 機械</span>
+                            <h1 class="neon-title">About Me</h1>
+                            <p class="intro">
+                                I'm <span class="highlight">Israel Albuquerque</span>, a <span class="highlight">Senior
+                                    Full-Stack Software Engineer</span> delivering <span class="neon">cybernetic solutions</span>
+                                for organizations that cannot fail.
+                            </p>
+                        </div>
+
+                        <div class="about-highlight-grid">
+                            <div class="highlight-card">
+                                <h3>Systems Architecture</h3>
+                                <p>Designing distributed, resilient ecosystems with obsidian minimalism and orange precision.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <h3>Cybersecurity Leadership</h3>
+                                <p>Embedding proactive defence and zero-trust mindset into every layer of delivery.</p>
+                            </div>
+                            <div class="highlight-card">
+                                <h3>Applied Mathematics</h3>
+                                <p>Blending analytical rigour with automation to orchestrate intelligent decision-making.</p>
+                            </div>
+                        </div>
 
                         <div class="bio-section">
                             <div class="bio-block">
@@ -76,12 +142,13 @@
                                 </p>
                                 <p class="project-links">
                                     <strong>Explore more:</strong>
-                                    <a href="https://www.simm.pro" target="_blank" style="color: #f26b36;">SIMM.PRO</a>
-                                    |
+                                    <a href="https://www.simm.pro" target="_blank" rel="noopener">SIMM.PRO</a>
+                                    <span class="divider">|</span>
                                     <a href="https://technibus.com.br/2022/04/13/vlt-baixada-santista-conta-com-tecnologia-de-sonorizacao-e-mensagens/"
-                                        target="_blank" style="color: #f26b36;">Technibus Article</a> |
+                                        target="_blank" rel="noopener">Technibus Article</a>
+                                    <span class="divider">|</span>
                                     <a href="https://www.segs.com.br/veiculos/341973-tecnologia-facilita-o-dia-a-dia-dos-passageiros-do-vlt-na-baixada-santista"
-                                        target="_blank" style="color: #f26b36;">SEGS Article</a>
+                                        target="_blank" rel="noopener">SEGS Article</a>
                                 </p>
                             </div>
 
@@ -104,6 +171,30 @@
                             </div>
                         </div>
 
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <span class="timeline-year">2024 → Present</span>
+                                <div class="timeline-content">
+                                    <h4>SIMM.PRO — Principal Engineer</h4>
+                                    <p>Leading the evolution of transportation intelligence for São Paulo Metro, Santos VLT, and GRU Airport.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-year">2019 → 2024</span>
+                                <div class="timeline-content">
+                                    <h4>Enterprise Platforms</h4>
+                                    <p>Architected high-availability fintech and telecom platforms across Brazil and Latin America.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-year">2013 → 2019</span>
+                                <div class="timeline-content">
+                                    <h4>Foundations</h4>
+                                    <p>Developed automation, IoT, and embedded systems bridging software, hardware, and mathematics.</p>
+                                </div>
+                            </div>
+                        </div>
+
                         <h2 class="neon-title">Main Skills</h2>
                         <ul class="skills-list">
                             <li>💻 Full-Stack Development <small>(JavaScript, Node.js, Python, Go, C#, C++, C)</small>
@@ -114,9 +205,102 @@
                             <li>🚀 Scalable Software Architecture & DevOps</li>
                         </ul>
 
+                        <div class="about-cta">
+                            <button type="button" class="cta primary" onclick="showPage(2)">See featured work</button>
+                            <button type="button" class="cta ghost" onclick="showPage(3)">Start a project</button>
+                        </div>
+
                         <div class="social-links">
-                            <a href="https://github.com/leoisrael" target="_blank">GitHub</a>
-                            <a href="https://linkedin.com/in/israel-albuquerque-286049152" target="_blank">LinkedIn</a>
+                            <a href="https://github.com/leoisrael" target="_blank" rel="noopener">GitHub</a>
+                            <a href="https://linkedin.com/in/israel-albuquerque-286049152" target="_blank" rel="noopener">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECTS PAGE -->
+            <div class="page" id="projects-page">
+                <div class="container-block-projects">
+                    <div class="projects-content">
+                        <div class="section-header">
+                            <span class="section-eyebrow">選抜プロジェクト</span>
+                            <h1 class="neon-title">Featured Projects</h1>
+                            <p class="intro">A curated showcase where minimal cyberpunk aesthetics meet reliable, large-scale delivery.</p>
+                        </div>
+
+                        <div class="projects-grid">
+                            <article class="project-card">
+                                <div class="project-header">
+                                    <span class="project-kanji" aria-hidden="true">守</span>
+                                    <h2>SIMM.PRO Command Center</h2>
+                                </div>
+                                <p>Designed and scaled the intelligence backbone powering São Paulo Metro Line 17, Santos VLT, and GRU Airport operations.</p>
+                                <ul class="project-tags">
+                                    <li>Go</li>
+                                    <li>Microservices</li>
+                                    <li>Kubernetes</li>
+                                    <li>Observability</li>
+                                </ul>
+                                <div class="project-links">
+                                    <a href="https://www.simm.pro" target="_blank" rel="noopener">Official site</a>
+                                    <a href="https://technibus.com.br/2022/04/13/vlt-baixada-santista-conta-com-tecnologia-de-sonorizacao-e-mensagens/" target="_blank" rel="noopener">Press</a>
+                                </div>
+                            </article>
+
+                            <article class="project-card">
+                                <div class="project-header">
+                                    <span class="project-kanji" aria-hidden="true">光</span>
+                                    <h2>OrionOS Failover Mesh</h2>
+                                </div>
+                                <p>A minimal, diskless operating system enabling autonomous failover clusters without proprietary hardware.</p>
+                                <ul class="project-tags">
+                                    <li>Linux</li>
+                                    <li>PXE</li>
+                                    <li>Rust</li>
+                                    <li>Automation</li>
+                                </ul>
+                                <div class="project-links">
+                                    <span class="upcoming">Case study soon</span>
+                                </div>
+                            </article>
+
+                            <article class="project-card">
+                                <div class="project-header">
+                                    <span class="project-kanji" aria-hidden="true">警</span>
+                                    <h2>Neon Sentinel</h2>
+                                </div>
+                                <p>Cybersecurity framework delivering real-time threat detection and automated response for critical infrastructures.</p>
+                                <ul class="project-tags">
+                                    <li>Python</li>
+                                    <li>SIEM</li>
+                                    <li>Machine Learning</li>
+                                </ul>
+                                <div class="project-links">
+                                    <a href="mailto:israeljj2@gmail.com">Request briefing</a>
+                                </div>
+                            </article>
+
+                            <article class="project-card">
+                                <div class="project-header">
+                                    <span class="project-kanji" aria-hidden="true">道</span>
+                                    <h2>Urban Flow Analytics</h2>
+                                </div>
+                                <p>Data platform correlating passenger telemetry, IoT sensors, and predictive models to orchestrate mobility experiences.</p>
+                                <ul class="project-tags">
+                                    <li>Data Engineering</li>
+                                    <li>Kafka</li>
+                                    <li>Python</li>
+                                    <li>Visualization</li>
+                                </ul>
+                                <div class="project-links">
+                                    <a href="https://www.linkedin.com/in/israel-albuquerque-286049152/" target="_blank" rel="noopener">Discuss on LinkedIn</a>
+                                </div>
+                            </article>
+                        </div>
+
+                        <div class="projects-footer">
+                            <p>Every build respects the balance between aesthetics, security, and operational excellence — a personal signature.</p>
+                            <button type="button" class="cta primary" onclick="showPage(3)">Plan the next mission</button>
                         </div>
                     </div>
                 </div>
@@ -126,27 +310,52 @@
             <div class="page" id="contact-page">
                 <div class="container-block3">
                     <div class="contact-content">
-                        <h1 class="neon-title">Get in Touch</h1>
-                        <p class="intro">
-                            Have an innovative idea, project proposal, or just want to discuss tech?
-                            Drop me a message!
-                        </p>
+                        <div class="section-header">
+                            <span class="section-eyebrow">接続</span>
+                            <h1 class="neon-title">Get in Touch</h1>
+                            <p class="intro">
+                                Have an innovative idea, project proposal, or just want to discuss tech?
+                                Drop me a message!
+                            </p>
+                        </div>
 
-                        <form action="https://formsubmit.co/israeljj2@gmail.com" method="POST" class="contact-form">
-                            <input type="text" name="name" placeholder="Your Name" required>
-                            <input type="email" name="email" placeholder="Your Email" required>
-                            <textarea name="message" placeholder="Your Message" required></textarea>
-                            <button type="submit">Send Message</button>
-                        </form>
+                        <div class="contact-grid">
+                            <form action="https://formsubmit.co/israeljj2@gmail.com" method="POST" class="contact-form">
+                                <input type="text" name="name" placeholder="Your Name" required>
+                                <input type="email" name="email" placeholder="Your Email" required>
+                                <textarea name="message" placeholder="Your Message" required></textarea>
+                                <button type="submit">Send Message</button>
+                            </form>
 
-                        <div class="contact-info">
-                            <p><strong>Email:</strong> <a href="mailto:israeljj2@gmail.com">israeljj2@gmail.com</a></p>
-                            <p><strong>Location:</strong> São Paulo, Brazil 🌎</p>
+                            <div class="contact-side">
+                                <div class="contact-card">
+                                    <h3>How I can help</h3>
+                                    <p>Designing resilient architectures, leading cybersecurity transformations, and mentoring engineering squads.</p>
+                                </div>
+                                <div class="contact-card">
+                                    <h3>Quick facts</h3>
+                                    <ul>
+                                        <li>Based in São Paulo • available for global engagements</li>
+                                        <li>English • Portuguese • Spanish</li>
+                                        <li>Strategic leadership with hands-on delivery</li>
+                                    </ul>
+                                </div>
+                                <div class="contact-card">
+                                    <h3>Contact</h3>
+                                    <p><strong>Email:</strong> <a href="mailto:israeljj2@gmail.com">israeljj2@gmail.com</a></p>
+                                    <p><strong>Location:</strong> São Paulo, Brazil 🌎</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-signature">
+                            <span class="signature-kanji" aria-hidden="true">信頼</span>
+                            <p>Let's craft the next chapter of your digital infrastructure.</p>
                         </div>
 
                         <div class="social-links">
-                            <a href="https://github.com/leoisrael" target="_blank">GitHub</a>
-                            <a href="https://linkedin.com/in/israel-albuquerque-286049152" target="_blank">LinkedIn</a>
+                            <a href="https://github.com/leoisrael" target="_blank" rel="noopener">GitHub</a>
+                            <a href="https://linkedin.com/in/israel-albuquerque-286049152" target="_blank" rel="noopener">LinkedIn</a>
                         </div>
                     </div>
                 </div>
@@ -155,18 +364,26 @@
             <!-- BLOG PAGE -->
             <div class="page" id="blog-page">
                 <div class="container-block4">
-                    <h1 class="section-title">Blog</h1>
+                    <div class="blog-content">
+                        <div class="section-header">
+                            <span class="section-eyebrow">フィールドノート</span>
+                            <h1 class="neon-title">Blog</h1>
+                            <p class="intro">Insights on architecture, cybersecurity, and experiments shaping my craft.</p>
+                        </div>
 
-                    <!-- Grid com os posts -->
-                    <div class="blog-list"></div>
+                        <div class="blog-wrapper">
+                            <!-- Grid com os posts -->
+                            <div class="blog-list"></div>
 
-                    <!-- Área de visualização do post -->
-                    <div class="post-view" style="display: none;">
-                        <button class="back-to-blog" onclick="closePost()">← Back</button>
-                        <div class="post-content">
-                            <h1 id="post-title"></h1>
-                            <small id="post-date"></small>
-                            <div id="post-body"></div>
+                            <!-- Área de visualização do post -->
+                            <div class="post-view" style="display: none;">
+                                <button class="back-to-blog" onclick="closePost()">← Back</button>
+                                <div class="post-content">
+                                    <h1 id="post-title"></h1>
+                                    <small id="post-date"></small>
+                                    <div id="post-body"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -182,6 +399,22 @@
             </div>
             <div class="btn-right" onclick="goRight()">
                 <img src="images/arrow.png" alt="Right Arrow">
+            </div>
+        </div>
+
+        <div class="pagination-hud">
+            <div class="page-counter">
+                <span id="page-number">01</span>
+                <span class="divider">/</span>
+                <span id="page-total">05</span>
+            </div>
+            <div class="page-label" id="page-label">Home</div>
+            <div class="indicator-dots">
+                <button type="button" class="dot active" data-index="0" onclick="showPage(0)" aria-label="Go to Home"></button>
+                <button type="button" class="dot" data-index="1" onclick="showPage(1)" aria-label="Go to About"></button>
+                <button type="button" class="dot" data-index="2" onclick="showPage(2)" aria-label="Go to Projects"></button>
+                <button type="button" class="dot" data-index="3" onclick="showPage(3)" aria-label="Go to Contact"></button>
+                <button type="button" class="dot" data-index="4" onclick="showPage(4)" aria-label="Go to Blog"></button>
             </div>
         </div>
 
@@ -246,64 +479,53 @@
         /******************************************
          *   ANIMAÇÃO DE TRADUÇÃO (HOME)
          ******************************************/
-        function traduzirTexto(texto, idioma) {
-            switch (idioma) {
-                case 'en':
-                    return texto;
-                case 'pt':
-                    switch (texto) {
-                        case 'Welcome!':
-                            return 'Bem-vindo!';
-                        case 'My name is Israel Albuquerque.':
-                            return 'Meu nome é Israel Albuquerque.';
-                        case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
-                            return 'Sou engenheiro de software impulsionado por desafios, moldando o futuro através de soluções que empurram os limites da tecnologia. Minha jornada é uma busca incessante por inovação, onde cada linha de código é um passo rumo ao progresso.';
-                        default:
-                            return texto;
-                    }
-                case 'es':
-                    switch (texto) {
-                        case 'Welcome!':
-                            return '¡Bienvenido!';
-                        case 'My name is Israel Albuquerque.':
-                            return 'Mi nombre es Israel Albuquerque.';
-                        case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
-                            return 'Soy un ingeniero de software impulsado por desafíos, dando forma al futuro a través de soluciones que empujan los límites de la tecnología. Mi camino es una búsqueda inquebrantable de innovación, donde cada línea de código es un paso hacia el progreso.';
-                        default:
-                            return texto;
-                    }
-                case 'ja':
-                    switch (texto) {
-                        case 'Welcome!':
-                            return 'ようこそ！';
-                        case 'My name is Israel Albuquerque.':
-                            return '私の名前はIsrael Albuquerqueです。';
-                        case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
-                            return '私は挑戦に駆り立てられるソフトウェアエンジニアであり、技術の限界を押し広げる解決策を通じて未来を形作っています。私の旅は革新への不断の探求であり、各行のコードは進歩への一歩です。';
-                        default:
-                            return texto;
-                    }
-                case 'ko':
-                    switch (texto) {
-                        case 'Welcome!':
-                            return '환영합니다!';
-                        case 'My name is Israel Albuquerque.':
-                            return '제 이름은 이스라엘 알부케르크입니다.';
-                        case 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.':
-                            return '저는 도전을 즐기는 소프트웨어 엔지니어로, 기술의 경계를 넓히는 해결책을 통해 미래를 형성하고 있습니다. 제 여정은 끊임없는 혁신을 향한 탐구이며, 각 줄의 코드는 발전을 향한 한 걸음입니다.';
-                        default:
-                            return texto;
-                    }
-                default:
-                    return texto;
+        const heroTranslations = {
+            en: {
+                headline: 'Cybernetic craftsmanship for mission-critical systems.',
+                subtitle: "I'm Israel Albuquerque, a senior engineer architecting resilient platforms.",
+                paragraph: "From urban mobility to cybersecurity, I deliver minimal, impactful solutions inspired by Tokyo's neon precision."
+            },
+            pt: {
+                headline: 'Artesanato cibernético para sistemas de missão crítica.',
+                subtitle: 'Sou Israel Albuquerque, um engenheiro sênior que arquiteta plataformas resilientes.',
+                paragraph: 'Da mobilidade urbana à cibersegurança, entrego soluções minimalistas e impactantes inspiradas na precisão neon de Tóquio.'
+            },
+            es: {
+                headline: 'Artesanía cibernética para sistemas de misión crítica.',
+                subtitle: 'Soy Israel Albuquerque, un ingeniero senior que diseña plataformas resilientes.',
+                paragraph: 'Desde la movilidad urbana hasta la ciberseguridad, entrego soluciones minimalistas e impactantes inspiradas en la precisión neón de Tokio.'
+            },
+            ja: {
+                headline: 'ミッションクリティカルなシステムのためのサイバネティックなクラフトマンシップ。',
+                subtitle: '私はイスラエル・アルブケルキ。レジリエントなプラットフォームを設計するシニアエンジニアです。',
+                paragraph: '都市モビリティからサイバーセキュリティまで、東京のネオンの精密さに着想を得たミニマルでインパクトのあるソリューションを提供します。'
+            },
+            ko: {
+                headline: '미션 크리티컬 시스템을 위한 사이버네틱 장인 정신.',
+                subtitle: '저는 이스라엘 알부케르케이며, 탄력적인 플랫폼을 설계하는 시니어 엔지니어입니다.',
+                paragraph: '도시 모빌리티부터 사이버 보안까지, 도쿄의 네온 정밀함에서 영감을 받은 미니멀하고 임팩트 있는 솔루션을 제공합니다.'
             }
+        };
+
+        function traduzirTexto(texto, idioma) {
+            if (idioma === 'en') {
+                return texto;
+            }
+
+            const reference = heroTranslations.en;
+            const key = Object.keys(reference).find(k => reference[k] === texto);
+            if (!key) {
+                return texto;
+            }
+
+            return heroTranslations[idioma]?.[key] || texto;
         }
 
         function iniciarAnimacaoTraducao() {
             const textoOriginal = {
-                h1: 'Welcome!',
-                h2: 'My name is Israel Albuquerque.',
-                p: 'I am a software engineer driven by challenges, shaping the future through solutions that push the boundaries of technology. My journey is an unwavering quest for innovation, where each line of code is a step towards progress.'
+                h1: heroTranslations.en.headline,
+                h2: heroTranslations.en.subtitle,
+                p: heroTranslations.en.paragraph
             };
 
             const idiomas = ['en', 'pt', 'es', 'ja', 'ko'];
@@ -316,9 +538,9 @@
                 p: traduzirTexto(textoOriginal.p, primeiroIdioma)
             };
 
-            animarDigitacao('.apresentacao h1', primeiraTraducao.h1);
-            animarDigitacao('.apresentacao h2', primeiraTraducao.h2);
-            animarDigitacao('.apresentacao p', primeiraTraducao.p);
+            animarDigitacao('.apresentacao .hero-headline', primeiraTraducao.h1);
+            animarDigitacao('.apresentacao .hero-subtitle', primeiraTraducao.h2);
+            animarDigitacao('.apresentacao .hero-description', primeiraTraducao.p);
 
             setInterval(() => {
                 const idioma = idiomas[indiceIdiomaAtual];
@@ -328,9 +550,9 @@
                     p: traduzirTexto(textoOriginal.p, idioma)
                 };
 
-                animarDigitacao('.apresentacao h1', traducao.h1);
-                animarDigitacao('.apresentacao h2', traducao.h2);
-                animarDigitacao('.apresentacao p', traducao.p);
+                animarDigitacao('.apresentacao .hero-headline', traducao.h1);
+                animarDigitacao('.apresentacao .hero-subtitle', traducao.h2);
+                animarDigitacao('.apresentacao .hero-description', traducao.p);
 
                 indiceIdiomaAtual++;
                 if (indiceIdiomaAtual >= idiomas.length) {
@@ -360,9 +582,9 @@
         const overlay = document.getElementById('blocks-overlay');
 
         // Ajuste estes valores como preferir:
-        const NUM_BARS = 500;          // quantidade de barras
-        const BASE_DURATION = 0.6;    // tempo base (segundos) para cada barra atravessar a tela
-        const MAX_RANDOM_DELAY = 0.5; // atraso aleatório máximo
+        const NUM_BARS = 220;          // quantidade de barras
+        const BASE_DURATION = 0.7;    // tempo base (segundos) para cada barra atravessar a tela
+        const MAX_RANDOM_DELAY = 0.35; // atraso aleatório máximo
 
         // Vamos guardar o maior delay real encontrado, 
         // para saber quando encerrar o overlay ao final.
@@ -412,6 +634,7 @@
 
             // Destaca o Home como ativo ao iniciar
             updateMenuActiveState(0);
+            updatePaginationStatus(0);
         });
 
 
@@ -422,7 +645,12 @@
         /******************************************************
          *    FUNÇÕES DE TRANSIÇÃO DE PÁGINAS (exemplo)
          ******************************************************/
-        const pages = ['home', 'about', 'contact', 'blog'];
+        const pages = ['home', 'about', 'projects', 'contact', 'blog'];
+        const pageLabels = ['Home', 'About', 'Projects', 'Contact', 'Blog'];
+        const pageCounterEl = document.getElementById('page-number');
+        const pageTotalEl = document.getElementById('page-total');
+        const pageLabelEl = document.getElementById('page-label');
+        const indicatorDots = document.querySelectorAll('.indicator-dots .dot');
         let currentIndex = 0;
 
         function showPage(index) {
@@ -460,6 +688,7 @@
 
                     // <-- Aqui chamamos a função que atualiza o "ativo" do menu
                     updateMenuActiveState(index);
+                    updatePaginationStatus(index);
 
                 }, 800);
             }, quarterTime);
@@ -467,15 +696,41 @@
 
         /** Função que destaca o link do menu correspondente à página atual */
         function updateMenuActiveState(index) {
-            // Seleciona todos os <a> dentro de .pages
-            const menuLinks = document.querySelectorAll('.pages a');
+            // Seleciona todos os botões dentro de .pages
+            const menuLinks = document.querySelectorAll('.pages button');
 
             // Remove a classe .active de todos e adiciona apenas no link correto
             menuLinks.forEach((link, i) => {
                 if (i === index) {
                     link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
                 } else {
                     link.classList.remove('active');
+                    link.removeAttribute('aria-current');
+                }
+            });
+        }
+
+        function updatePaginationStatus(index) {
+            if (pageCounterEl) {
+                pageCounterEl.textContent = String(index + 1).padStart(2, '0');
+            }
+
+            if (pageTotalEl) {
+                pageTotalEl.textContent = String(pageLabels.length).padStart(2, '0');
+            }
+
+            if (pageLabelEl) {
+                pageLabelEl.textContent = pageLabels[index] || '';
+            }
+
+            indicatorDots.forEach((dot, dotIndex) => {
+                if (dotIndex === index) {
+                    dot.classList.add('active');
+                    dot.setAttribute('aria-current', 'page');
+                } else {
+                    dot.classList.remove('active');
+                    dot.removeAttribute('aria-current');
                 }
             });
         }
